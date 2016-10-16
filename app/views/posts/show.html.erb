@@ -2,3 +2,16 @@
 <p><%= number_to_currency @post.cost %></p>
 <p><%= @post.body %></p>
 <p><%= image_tag @post.image %></p>
+
+<h3>Location: <%= @post.address %></h3>
+<div id="map-container">
+  <div id="map-canvas"></div>
+</div>
+
+<%= javascript_tag do %>
+	latitude = '<%= j @post.latitude.to_s %>';
+	longitude = '<%= j @post.longitude.to_s %>';
+	title = '<%= j @post.title %>';
+	cost = '<%= j number_to_currency(@post.cost) %>';
+	address = '<%= j @post.address %>';
+<% end %>

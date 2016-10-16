@@ -36,11 +36,16 @@ gem 'devise'
 gem 'paperclip', '~> 5.0.0'
 # simple_form
 gem 'simple_form'
+# geocode
+gem 'geocoder'
+# figaro for hiding API key
+gem 'figaro'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
   gem 'pry-rails'
+  # gem 'byebug', platform: :mri
 end
 
 group :development do
