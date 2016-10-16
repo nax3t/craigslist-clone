@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 
 # devise for user authentication
 gem 'devise'
+# paperclip
+gem 'paperclip', '~> 5.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
