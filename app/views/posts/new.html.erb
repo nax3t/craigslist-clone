@@ -1,2 +1,9 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1>New Post</h1>
+<%= simple_form_for @post do |f| %>
+  <%= f.input :title %>
+  <%= f.input :cost %>
+  <%= f.input :body %>
+  <%= f.input :image, as: :file %>
+  
+  <%= f.button :submit %>
+<% end %>
