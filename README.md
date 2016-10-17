@@ -60,14 +60,26 @@ validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
 - Install [ImageMagick](https://github.com/thoughtbot/paperclip#image-processor)
 	- mac - `brew install imagemagick`
-	- c9 - `sudo apt-get install imagemagick -y`
+	- c9	
+		- `sudo apt-get update`
+		- `sudo apt-get install imagemagick -y`
 - Fire up your app and navigate to `localhost:3000/posts/new`, create a new post
 - Edit your `posts_controller` `show` action and `posts/show.html.erb` view to display the Post info
 	- use `number_to_currency` and `image_tag` to render the cost and the image
 	
+#### To do items: 
+- Complete full CRUD for Posts
+- Associate User and Post (one:many)
+- Add post validations and error rendering
+- Add authorization to stop malicious editing or deleting of posts
+
+See [c9 workspace](https://ide.c9.io/nax3t/tts-dal
+) for source code (navigate to: `tts-dal/rails/day_17_craigslist_clone_part_1/craigslist-clone`)
+
+	
 ## Day 2 Google Maps
 - Add figaro gem to Gemfile
-	- `gem figaro`
+	- `gem 'figaro'`
 	- Run `bundle`
 	- Run `bundle exec figaro install`
 - Create a new project in [Google Maps API](https://developers.google.com/maps/web/) and get a key
@@ -159,7 +171,7 @@ end
 geocoded_by :address
 after_validation :geocode
 ```
-- To render the address and marker onto the map we'll need to set the JavaScript variables using Rail's [javascript_tag](http://api.rubyonrails.org/classes/ActionView/Helpers/JavaScriptHelper.html#method-i-javascript_tag), add the following code to the bottom of `posts/show.ejs`
+- To render the address and marker onto the map we'll need to set the JavaScript variables using Rail's [javascript_tag](http://api.rubyonrails.org/classes/ActionView/Helpers/JavaScriptHelper.html#method-i-javascript_tag), add the following code to the bottom of `posts/show.erb`
 ```ruby
 <%= javascript_tag do %>
 	latitude = '<%= j @post.latitude.to_s %>';
@@ -208,3 +220,18 @@ $(document).ready(function (){
 });
 ```
 - Open up `rails console` and delete all pre-exisiting posts with `Post.destroy_all` now close rails console, run your `rails server` and create a new post.
+
+### DISABLE TURBOLINKS
+
+Do you have to refresh the page several times for the map to load? This is because of turbolinks. Turbolinks is rails gem that conflicts with our javascript. 
+Funny, because its intended purpose is to load pages faster. Let's kill it.   
+
+- Remove the gem 'turbolinks' line from your Gemfile.
+- Remove the //= require turbolinks from your app/assets/javascripts/application.js.
+- Remove the two "data-turbolinks-track" => true hash key/value pairs from yourapp/views/layouts/application.html.erb.
+
+## Day 3 Post Search
+- to do
+
+## Day 4 Styling
+- Install the [twitter-bootstrap-rails](https://github.com/seyhunak/twitter-bootstrap-rails#installing-the-css-stylesheets) gem

@@ -1,5 +1,4 @@
 $(document).ready(function (){
-
 	function initialize() {
 		var myLatlng = new google.maps.LatLng(latitude, longitude);
 
