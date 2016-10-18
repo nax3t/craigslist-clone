@@ -1,11 +1,24 @@
-<h1><%= @post.title %></h1>
-<p><%= number_to_currency @post.cost %></p>
-<p><%= @post.body %></p>
-<p><%= image_tag @post.image %></p>
-
-<h3>Location: <%= @post.address %></h3>
-<div id="map-container">
-  <div id="map-canvas"></div>
+<div class="row">
+	<div class="col-md-4">
+		<div class="thumbnail">
+			<%= image_tag @post.image %>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<p>Post creator: <%= @post.user.email %></p>
+		<h1><%= @post.title %></h1>
+		<p><%= number_to_currency @post.cost %></p>
+		<p><%= @post.body %></p>
+		<% if current_user == @post.user %>
+		<p><%= link_to 'Edit', edit_post_path(@post.id)%> | <%= link_to 'Delete', post_path(@post.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+		<% end %>
+	</div>
+	<div class="col-md-12">
+		<h3>Location: <%= @post.address %></h3>
+		<div id="map-container">
+		  <div id="map-canvas"></div>
+		</div>
+	</div>
 </div>
 
 <%= javascript_tag do %>
