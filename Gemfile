@@ -40,7 +40,8 @@ gem 'simple_form'
 gem 'geocoder'
 # figaro for hiding API key
 gem 'figaro'
-
+# bootstrap
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
