@@ -31,13 +31,14 @@
             <li class="<%= 'active' if current_page?(posts_path) %>"><%= link_to 'Posts', posts_path %></li>
             <li class="<%= 'active' if current_page?(new_post_path) %>"><%= link_to 'New Post', new_post_path %></li>
           </ul>
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
           <ul class="nav navbar-nav navbar-right">
+          <!-- Search form -->
+          <%= form_tag posts_path, :method => 'get', class: 'navbar-form navbar-left' do %>
+            <div class='form-group'>
+              <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search' %>
+            </div>
+              <%= submit_tag "Search", :name => nil, class: 'btn btn-default' %>
+          <% end %>
           <% if user_signed_in? %>
             <li><%= link_to current_user.email, edit_user_registration_path, :class => 'navbar-link' %></li>
             <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
@@ -49,15 +50,14 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-  	
-	  <% if notice %>
-	    <p class="alert alert-success"><%= notice %></p>
-	  <% end %>
-	  <% if alert %>
-	    <p class="alert alert-danger"><%= alert %></p>
-	  <% end %>
-    <div class="container">
-    <%= yield %>
+  	<div class="container">
+  	  <% if notice %>
+  	    <p class="alert alert-success"><%= notice %></p>
+  	  <% end %>
+  	  <% if alert %>
+  	    <p class="alert alert-danger"><%= alert %></p>
+  	  <% end %>
+      <%= yield %>
     </div>
   </body>
 </html>
