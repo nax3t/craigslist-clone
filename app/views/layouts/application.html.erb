@@ -12,44 +12,58 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+      <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            Menu <i class="fa fa-bars"></i>
           </button>
           <%= link_to 'Craigslist Clone', root_path, class: 'navbar-brand' %>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="<%= 'active' if current_page?(posts_path) %>"><%= link_to 'Posts', posts_path %></li>
-            <li class="<%= 'active' if current_page?(new_post_path) %>"><%= link_to 'New Post', new_post_path %></li>
-          </ul>
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
           <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
+            <li><%= link_to 'Posts', posts_path %></li>
+            <li><%= link_to 'New Post', new_post_path %></li>
+            <!-- Search form -->
+            <%= form_tag posts_path, :method => 'get', class: 'navbar-form navbar-left' do %>
+            <div class='form-group'>
+              <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search' %>
+            </div>
+            <%= submit_tag "Search", :name => nil, class: 'btn btn-default' %>
+            <% end %>
+            <% if user_signed_in? %>
             <li><%= link_to current_user.email, edit_user_registration_path, :class => 'navbar-link' %></li>
             <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
-          <% else %>
+            <% else %>
             <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
             <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-          <% end %>
+            <% end %>
           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
     </nav>
-  	
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" id="sitewide-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="site-heading">
+              <h1>Craigslist Clone</h1>
+              <hr class="small">
+              <span class="subheading">Welcome to our couch app!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 	  <% if notice %>
 	    <p class="alert alert-success"><%= notice %></p>
 	  <% end %>

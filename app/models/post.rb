@@ -9,4 +9,13 @@ class Post < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode
+  
+  def self.search(search)
+  	if search
+  		search.downcase!
+  		where("lower(title) LIKE ?", "%#{search}%")
+  	else
+  		all
+  	end
+  end
 end
