@@ -301,3 +301,10 @@ end
 
 ## Day 4 Styling
 - Install the [twitter-bootstrap-rails](https://github.com/seyhunak/twitter-bootstrap-rails#installing-the-css-stylesheets) gem
+- download a free theme from [startbootstrap.com](startbootstrap.com) (we used [clean blog](https://github.com/BlackrockDigital/startbootstrap-clean-blog/archive/gh-pages.zip))
+- unzip the theme
+- copy and paste images dir into public
+- copy and paste the minified css theme into vendor/assets/stylesheets - require in application.css (e.g. require clean-blog.min)
+- copy and paste the minified js file into vendor/assets/javascripts - require in application.js
+- open index.html, find any google fonts, copy and paste their - import codes from fonts.google.com into application.css using @import url()
+- open index.html and copy over the navbar and header areas, be sure to replace the appropriate elements with your pre-existing rails content
