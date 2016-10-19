@@ -231,7 +231,73 @@ Funny, because its intended purpose is to load pages faster. Let's kill it.
 - Remove the two "data-turbolinks-track" => true hash key/value pairs from yourapp/views/layouts/application.html.erb.
 
 ## Day 3 Post Search
-- to do
+- Open up your `application.html.erb` file and modify the navbar. In the following code we are removing the html form and adding in a rails form with ERB syntax:
+
+```html
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Craigslist Clone', root_path, class: 'navbar-brand' %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="<%= 'active' if current_page?(posts_path) %>"><%= link_to 'Posts', posts_path %></li>
+        <li class="<%= 'active' if current_page?(new_post_path) %>"><%= link_to 'New Post', new_post_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <!-- Search form -->
+      <%= form_tag posts_path, :method => 'get', class: 'navbar-form navbar-left' do %>
+        <div class='form-group'>
+          <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search' %>
+        </div>
+          <%= submit_tag "Search", :name => nil, class: 'btn btn-default' %>
+      <% end %>
+      <% if user_signed_in? %>
+        <li><%= link_to current_user.email, edit_user_registration_path, :class => 'navbar-link' %></li>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+      <% else %>
+        <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
+        <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+      <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+```
+
+- Open up the `posts_controller.rb` file and replace the index action with the following code:
+
+```ruby
+def index
+  @posts = Post.search(params[:search])
+end
+```
+
+- .search is not a regular class method for the Post model, so we'll have to create it ourselves, open up your post model `models/post.rb` and add the following code to the bottom of your model before the closing `end` keyword:
+
+```ruby
+def self.search(search)
+  if search
+  	search = search.downcase
+    where('lower(title) LIKE ?', "%#{search}%")
+  else
+    all
+  end
+end
+```
+
+- Fire up your server and check it out, you should now have the ability to search for any existing posts using keywords from their titles
+
+- Discuss [SQL Injection](http://guides.rubyonrails.org/security.html#sql-injection) Security Exploit
 
 ## Day 4 Styling
 - Install the [twitter-bootstrap-rails](https://github.com/seyhunak/twitter-bootstrap-rails#installing-the-css-stylesheets) gem
