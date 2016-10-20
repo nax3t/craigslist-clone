@@ -30,10 +30,10 @@
             <li><%= link_to 'New Post', new_post_path %></li>
             <!-- Search form -->
             <%= form_tag posts_path, :method => 'get', class: 'navbar-form navbar-left' do %>
-            <div class='form-group'>
+            <div class='form-group col-xs-12 floating-label-form-group controls'>
               <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search' %>
+            <%= submit_tag "Search", :name => nil, id: 'submit-button', tabindex: '-1' %>
             </div>
-            <%= submit_tag "Search", :name => nil, class: 'btn btn-default' %>
             <% end %>
             <% if user_signed_in? %>
             <li><%= link_to current_user.email, edit_user_registration_path, :class => 'navbar-link' %></li>

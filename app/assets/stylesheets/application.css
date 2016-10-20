@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require clean-blog.min
+ *= require posts
  *= require_self
  */
 
