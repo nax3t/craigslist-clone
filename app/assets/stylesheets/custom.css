@@ -1,0 +1,11 @@
+.post-images:hover {
+    cursor: pointer;
+}
+
+.thumbnail {
+	height: 300px;
+}
+
+#navbar-brand {
+	font-family: arial;
+}

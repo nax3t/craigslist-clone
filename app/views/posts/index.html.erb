@@ -1,5 +1,18 @@
-<h1>Posts</h1>
-<% @posts.each do |post| %>
-	<p><%= post.title %> <%= link_to 'More info', post_path(post.id) %></p>
-	<hr>
-<% end %>
+<div class="row">
+	<div class="col-md-12">
+		<h1>Posts</h1>
+	</div>
+	<% @posts.each do |post| %>
+	<div class="col-md-3">
+		<div class="thumbnail">
+			<%= link_to post do %>
+				<%= image_tag post.image, class: 'post-images' %>
+			<% end %>
+			<p>
+				<strong><%= link_to post.title, post %></strong>
+			</p>
+			<p><%= number_to_currency(post.cost) %></p>
+		</div>
+	</div>
+	<% end %>
+</div>

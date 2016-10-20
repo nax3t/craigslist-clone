@@ -16,3 +16,16 @@
 #sitewide-header {
 	background-image: image-url('home-bg.jpg');
 }
+
+#new-post-header {
+	background-image: image-url('new-post-bg.jpg');	
+}
+
+#btn-navbar-search {
+	position: absolute;
+	left: -9999999px;
+}
+
+input#search.form-control {
+	color: #fff;
+}
