@@ -12,65 +12,16 @@
   </head>
 
   <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            Menu <i class="fa fa-bars"></i>
-          </button>
-          <%= link_to 'Craigslist Clone', root_path, class: 'navbar-brand' %>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to 'Posts', posts_path %></li>
-            <li><%= link_to 'New Post', new_post_path %></li>
-            <!-- Search form -->
-            <%= form_tag posts_path, :method => 'get', class: 'navbar-form navbar-left' do %>
-            <div class='form-group col-xs-12 floating-label-form-group controls'>
-              <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search' %>
-            <%= submit_tag "Search", :name => nil, id: 'submit-button', tabindex: '-1' %>
-            </div>
-            <% end %>
-            <% if user_signed_in? %>
-            <li><%= link_to current_user.email, edit_user_registration_path, :class => 'navbar-link' %></li>
-            <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
-            <% else %>
-            <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
-            <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-            <% end %>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container -->
-    </nav>
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" id="sitewide-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="site-heading">
-              <h1>Craigslist Clone</h1>
-              <hr class="small">
-              <span class="subheading">Welcome to our couch app!</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/header' %>
     <div class="container">
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    <%= yield %>
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <%= yield %>
     </div>
   </body>
 </html>

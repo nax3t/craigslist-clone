@@ -17,15 +17,15 @@
 	background-image: image-url('home-bg.jpg');
 }
 
-input.btn.btn-default {
-	padding: 6px 12px;
+#new-post-header {
+	background-image: image-url('new-post-bg.jpg');	
 }
 
-.form-control {
-	color: white;
-}
-
-#submit-button {
+#btn-navbar-search {
 	position: absolute;
-	left: -9999px
+	left: -9999999px;
+}
+
+input#search.form-control {
+	color: #fff;
 }
